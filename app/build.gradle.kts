@@ -66,4 +66,27 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    //Json String To Object Or Object To Json String
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+
+    //Icons
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+
+    //Lifecycle    //MVVM
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
+    //Dependency Injection
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
 }
