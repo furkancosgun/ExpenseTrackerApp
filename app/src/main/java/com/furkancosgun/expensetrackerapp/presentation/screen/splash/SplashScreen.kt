@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.furkancosgun.expensetrackerapp.R
+import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
 import kotlinx.coroutines.delay
@@ -24,9 +25,10 @@ import kotlinx.coroutines.delay
 fun SplashScreen(navController:NavController) {
     LaunchedEffect(key1 = true){
         delay(3000L)
+        navController.navigate(Screen.Auth.route)
     }
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-        Text(text = stringResource(id = R.string.app_name), style = MaterialTheme.typography.titleLarge, color = PrimaryColor)
+        Text(text = stringResource(id = R.string.app_name), style = MaterialTheme.typography.displayLarge, color = PrimaryColor)
     }
 }
 

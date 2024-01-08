@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ExpenseTracker</string>
+    <string name="welcome">Welcome</string>
+    <string name="login_with_your_email_and_password">Login with your Email and Password.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="don_t_have_a_account">Don\'t have a account?</string>
+    <string name="create_account">Create Account</string>
+    <string name="please_enter_your_details">Please enter your details.</string>
+    <string name="we_sent_to_the_e_mail">We sent to the e-mail:</string>
 </resources>

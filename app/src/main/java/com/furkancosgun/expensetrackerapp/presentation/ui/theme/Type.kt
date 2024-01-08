@@ -12,7 +12,8 @@ import androidx.compose.ui.unit.sp
 private val defaultTypography = Typography()
 // Set of Material typography styles to start with
 val Typography = Typography(
-    titleLarge = defaultTypography.titleLarge.copy(fontWeight = FontWeight.Bold, fontSize = 40.sp),
+    displayLarge = defaultTypography.titleLarge.copy(fontWeight = FontWeight.Bold, fontSize = 40.sp),
+    titleLarge = defaultTypography.titleLarge.copy(fontWeight = FontWeight.Bold),
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
