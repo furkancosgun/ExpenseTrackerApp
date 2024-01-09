@@ -1,5 +1,6 @@
 package com.furkancosgun.expensetrackerapp.presentation.ui.otp
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +13,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ErrorColor
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
 
 
@@ -29,20 +30,15 @@ fun OtpTextField(
     modifier: Modifier = Modifier,
     otpText: String,
     otpCount: Int = 6,
-    onOtpTextChange: (String) -> Unit
+    onOtpTextChange: (String) -> Unit,
+    errorText: String? = null
 ) {
-    LaunchedEffect(Unit) {
-        if (otpText.length > otpCount) {
-            onOtpTextChange.invoke(
-                otpText.substring(0, otpCount)
-            )
-        }
-    }
 
     BasicTextField(
         modifier = modifier,
         value = TextFieldValue(otpText, selection = TextRange(otpText.length)),
         onValueChange = {
+            if (it.text.length > otpCount) return@BasicTextField
             onOtpTextChange.invoke(it.text)
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
@@ -58,8 +54,12 @@ fun OtpTextField(
                     )
                 }
             }
-        }
+        },
+        singleLine = true
     )
+    AnimatedVisibility(visible = errorText != null) {
+        Text(text = errorText ?: "", color = ErrorColor)
+    }
 }
 
 @Composable
@@ -69,7 +69,7 @@ private fun CharView(
 ) {
     val isFocused = text.length == index
     val char = when {
-        index == text.length -> "0"
+        index == text.length -> ""
         index > text.length -> ""
         else -> text[index].toString()
     }

@@ -23,7 +23,6 @@ import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedTextField
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
-import com.furkancosgun.expensetrackerapp.presentation.ui.forgotpassword.ForgotPasswordScreenEvent
 import com.furkancosgun.expensetrackerapp.presentation.ui.forgotpassword.ForgotPasswordTitle
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
@@ -43,7 +42,15 @@ fun ForgotPasswordScreen(
                 }
 
                 is ForgotPasswordViewModel.ForgotPasswordViewModelEvent.Success -> {
-                    navController.navigate(Screen.Auth.VerifyAccount.route)
+                    navController.navigate(
+                        Screen.Auth.VerifyAccount.route.replace(
+                            oldValue = "{email}",
+                            newValue = viewModel.state.email
+                        ).replace(
+                            oldValue = "{next}",
+                            newValue = Screen.Auth.ResetPassword.route
+                        )
+                    )
                 }
             }
         }

@@ -27,5 +27,8 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="enter_your_email_for_the_verification_process_we_will_send_6_digits_code_to_your_email">Enter your email for the verification process,we will send 6 digits code to your email.</string>
     <string name="send">Send</string>
+    <string name="verify">Verify</string>
+    <string name="the_otp_can_t_be_blank">The otp can\'t be blank</string>
+    <string name="the_otp_code_must_be_d_characters_long">The otp code must be %d characters long</string>
 
 </resources>

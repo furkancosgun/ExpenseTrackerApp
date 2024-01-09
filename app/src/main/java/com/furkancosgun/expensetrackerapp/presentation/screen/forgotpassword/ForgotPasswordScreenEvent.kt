@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.ui.forgotpassword
+package com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword
 
 sealed class ForgotPasswordScreenEvent {
     data class EmailChanged(val email: String) : ForgotPasswordScreenEvent()

@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateEmailUseCase
-import com.furkancosgun.expensetrackerapp.presentation.ui.forgotpassword.ForgotPasswordScreenEvent
-import com.furkancosgun.expensetrackerapp.presentation.ui.forgotpassword.ForgotPasswordScreenState
+import com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword.ForgotPasswordScreenEvent
+import com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword.ForgotPasswordScreenState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ class ForgotPasswordViewModel(
     var state by mutableStateOf(ForgotPasswordScreenState())
     private val eventChannel = Channel<ForgotPasswordViewModelEvent>()
     val event = eventChannel.receiveAsFlow()
-    
+
     fun onEvent(event: ForgotPasswordScreenEvent) {
         when (event) {
             is ForgotPasswordScreenEvent.EmailChanged -> {
