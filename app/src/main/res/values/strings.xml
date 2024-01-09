@@ -10,4 +10,14 @@
     <string name="create_account">Create Account</string>
     <string name="please_enter_your_details">Please enter your details.</string>
     <string name="we_sent_to_the_e_mail">We sent to the e-mail:</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="email_cant_be_blank">The email can\'t be blank</string>
+    <string name="email_must_be_correct_format">The email must be in the correct format</string>
+    <string name="password_must_be_greater_than">The password must be at least %d characters long</string>
+    <string name="password_need_contains_one_letter_and_digit">The password needs to contains at least one letter and digit</string>
+    <string name="passwords_don_t_match">The passwords don\'t match</string>
+    <string name="the_first_name_can_t_be_blank">The first name can\'t be blank</string>
+    <string name="the_last_name_can_t_be_blank">The last name can\'t be blank</string>
+
 </resources>

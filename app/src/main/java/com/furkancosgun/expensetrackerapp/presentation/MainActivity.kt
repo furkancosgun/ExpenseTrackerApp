@@ -6,10 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.furkancosgun.expensetrackerapp.presentation.navigation.AppNavigation
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 
@@ -29,3 +26,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+//https://www.figma.com/file/Qws5eq3k7ZpYwSdXy5Ks8k/ExpenseTracker-(Full-Mobile-App)-(Community)?type=design&node-id=901-3173&mode=design&t=sr9N72nbKetDuZYR-0
