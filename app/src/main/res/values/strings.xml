@@ -24,5 +24,8 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="register">Register</string>
     <string name="already_have_a_account">Already have a account?</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="enter_your_email_for_the_verification_process_we_will_send_6_digits_code_to_your_email">Enter your email for the verification process,we will send 6 digits code to your email.</string>
+    <string name="send">Send</string>
 
 </resources>

@@ -5,6 +5,7 @@ import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateFirstNameUseCas
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateLastNameUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidatePasswordUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateRepeatedPasswordUseCase
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.LoginViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.RegisterViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,4 +19,5 @@ val AppModule = module {
     single { ValidateRepeatedPasswordUseCase(get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { RegisterViewModel(get(), get(), get(), get(), get()) }
+    viewModel { ForgotPasswordViewModel(get()) }
 }

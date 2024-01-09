@@ -62,6 +62,7 @@ fun AppOutlinedPasswordField(
         },
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         isError = errorText != null,
+        singleLine = true
     )
     AnimatedVisibility(visible = errorText != null) {
         Text1(text = errorText ?: "", color = ErrorColor)
