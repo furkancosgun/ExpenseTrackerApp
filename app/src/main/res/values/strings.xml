@@ -19,5 +19,10 @@
     <string name="passwords_don_t_match">The passwords don\'t match</string>
     <string name="the_first_name_can_t_be_blank">The first name can\'t be blank</string>
     <string name="the_last_name_can_t_be_blank">The last name can\'t be blank</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_a_account">Already have a account?</string>
 
 </resources>

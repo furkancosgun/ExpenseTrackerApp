@@ -88,5 +88,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
     //Dependency Injection
-    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
+    val koin_version = "3.5.3"
+    implementation("io.insert-koin:koin-androidx-compose:$koin_version")
+    implementation("io.insert-koin:koin-core:$koin_version")
+    implementation("io.insert-koin:koin-android:$koin_version")
 }

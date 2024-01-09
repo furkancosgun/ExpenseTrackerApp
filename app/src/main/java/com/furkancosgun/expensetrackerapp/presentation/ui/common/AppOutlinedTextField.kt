@@ -32,10 +32,8 @@ fun AppOutlinedTextField(
             )
         },
         isError = errorText != null,
-        supportingText = {
-            AnimatedVisibility(visible = errorText != null) {
-                Text(text = errorText ?: "", color = ErrorColor)
-            }
-        },
     )
+    AnimatedVisibility(visible = errorText != null) {
+        Text(text = errorText ?: "", color = ErrorColor)
+    }
 }
