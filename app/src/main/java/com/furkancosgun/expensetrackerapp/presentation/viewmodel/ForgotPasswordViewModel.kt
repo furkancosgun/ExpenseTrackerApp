@@ -16,6 +16,7 @@ class ForgotPasswordViewModel(
     private val validateEmailUseCase: ValidateEmailUseCase
 ) : ViewModel() {
     var state by mutableStateOf(ForgotPasswordScreenState())
+        private set
     private val eventChannel = Channel<ForgotPasswordViewModelEvent>()
     val event = eventChannel.receiveAsFlow()
 

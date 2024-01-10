@@ -24,7 +24,7 @@ class RegisterViewModel(
     private val validateRepeatedPasswordUseCase: ValidateRepeatedPasswordUseCase
 ) : ViewModel() {
     var state by mutableStateOf(RegisterScreenState())
-
+        private set
     private val eventChannel = Channel<RegisterViewModelEvent>()
     val event = eventChannel.receiveAsFlow()
 

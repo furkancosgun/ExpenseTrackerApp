@@ -9,6 +9,7 @@ import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateRepeatedPasswor
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.LoginViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.RegisterViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ResetPasswordViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyAccountViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -24,4 +25,5 @@ val AppModule = module {
     viewModel { RegisterViewModel(get(), get(), get(), get(), get()) }
     viewModel { ForgotPasswordViewModel(get()) }
     viewModel { VerifyAccountViewModel(get()) }
+    viewModel { ResetPasswordViewModel(get(), get()) }
 }

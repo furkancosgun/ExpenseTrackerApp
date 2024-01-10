@@ -16,6 +16,7 @@ class VerifyAccountViewModel(
     private val validateOtpCodeUseCase: ValidateOtpCodeUseCase
 ) : ViewModel() {
     var state by mutableStateOf(VerifyAccountScreenState())
+        private set
     private val eventChannel = Channel<VerifyAccountViewModelEvent>()
     val event = eventChannel.receiveAsFlow()
 

@@ -30,5 +30,7 @@
     <string name="verify">Verify</string>
     <string name="the_otp_can_t_be_blank">The otp can\'t be blank</string>
     <string name="the_otp_code_must_be_d_characters_long">The otp code must be %d characters long</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="set_the_new_password_for_your_account_so_you_can_login_and_access_all_the_features">Set the new password for your account so you can login and access all the features.</string>
 
 </resources>

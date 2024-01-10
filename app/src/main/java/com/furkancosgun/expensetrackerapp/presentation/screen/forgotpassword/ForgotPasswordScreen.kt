@@ -1,5 +1,6 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -44,11 +45,11 @@ fun ForgotPasswordScreen(
                 is ForgotPasswordViewModel.ForgotPasswordViewModelEvent.Success -> {
                     navController.navigate(
                         Screen.Auth.VerifyAccount.route.replace(
-                            oldValue = "{email}",
-                            newValue = viewModel.state.email
-                        ).replace(
                             oldValue = "{next}",
                             newValue = Screen.Auth.ResetPassword.route
+                        ).replace(
+                            oldValue = "{email}",
+                            newValue = viewModel.state.email
                         )
                     )
                 }
@@ -76,6 +77,9 @@ fun ForgotPasswordScreen(
         AppButton(modifier = Modifier.fillMaxWidth(), text = stringResource(R.string.send)) {
             viewModel.onEvent(ForgotPasswordScreenEvent.Submit)
         }
+    }
+    BackHandler {
+
     }
 }
 

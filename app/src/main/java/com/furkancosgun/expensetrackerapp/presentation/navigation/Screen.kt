@@ -12,7 +12,7 @@ sealed class Screen(val route: String) {
         data object Register : Screen("register")
         data object ForgotPassword : Screen("forgotPassword")
         data object VerifyAccount : Screen("verifyAccount?email={email}&next={next}")
-        data object ResetPassword : Screen("resetPassword")
+        data object ResetPassword : Screen("resetPassword?email={email}")
     }
 
     data object App : Screen("app") {

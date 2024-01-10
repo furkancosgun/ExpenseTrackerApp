@@ -18,6 +18,7 @@ class LoginViewModel(
     val validatePasswordUseCase: ValidatePasswordUseCase
 ) : ViewModel() {
     var state by mutableStateOf(LoginScreenState())
+        private set
     private val eventChannel = Channel<LoginViewModelEvent>()
     val event = eventChannel.receiveAsFlow()
     fun onEvent(event: LoginScreenEvent) {
