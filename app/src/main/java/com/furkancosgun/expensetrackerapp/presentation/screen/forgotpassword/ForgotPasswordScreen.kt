@@ -78,9 +78,6 @@ fun ForgotPasswordScreen(
             viewModel.onEvent(ForgotPasswordScreenEvent.Submit)
         }
     }
-    BackHandler {
-
-    }
 }
 
 

@@ -1,62 +1,93 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.bottomnavigation
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.FileOpen
+import androidx.compose.material.icons.filled.FolderOpen
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalAbsoluteTonalElevation
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.navigation.NavHostController
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.furkancosgun.expensetrackerapp.R
 import com.furkancosgun.expensetrackerapp.presentation.navigation.BottomNavScreen
 import com.furkancosgun.expensetrackerapp.presentation.navigation.BottomNavigation
-import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
+import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
+import com.furkancosgun.expensetrackerapp.presentation.ui.bottomnavigation.AppFloatingActionButton
+import com.furkancosgun.expensetrackerapp.presentation.ui.bottomnavigation.BottomNavigationNavBarItem
+import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
+import com.furkancosgun.expensetrackerapp.presentation.ui.theme.WhiteColor
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BottomNavigationScreen(navController: NavHostController) {
+fun BottomNavigationScreen(navController: NavController) {
+
+    val navBarController = rememberNavController()
     val bottomScreenList = mutableListOf(
         BottomNavScreen.Home,
+        BottomNavScreen.Settings,
     )
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val navBackStackEntry by navBarController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
+    var isFabOpen by remember {
+        mutableStateOf(false)
+    }
+
+
     Scaffold(
+        floatingActionButton = {
+            Row {
+                AnimatedVisibility(
+                    visible = isFabOpen,
+                    enter = expandHorizontally(expandFrom = Alignment.End),
+                    exit = shrinkHorizontally(shrinkTowards = Alignment.End)
+                ) {
+                    Row {
+                        AppFloatingActionButton(
+                            icon = Icons.Default.FolderOpen,
+                            contentDescription = stringResource(R.string.report)
+                        ) {
+                            navController.navigate(Screen.App.CreateReport.route)
+                        }
+                        AppFloatingActionButton(
+                            icon = Icons.Default.FileOpen,
+                            contentDescription = stringResource(R.string.expense),
+                        ) {
+                            navController.navigate(Screen.App.CreateExpense.route)
+                        }
+                    }
+                }
+                AppFloatingActionButton(
+                    icon = Icons.Default.Add,
+                ) {
+                    isFabOpen = !isFabOpen
+                }
+            }
+        },
         bottomBar = {
-            BottomAppBar {
+            BottomAppBar(
+                containerColor = WhiteColor
+            ) {
                 bottomScreenList.forEach { screen ->
-                    NavigationBarItem(
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = PrimaryColor,
-                            selectedTextColor = PrimaryColor,
-                            indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
-                                LocalAbsoluteTonalElevation.current
-                            )
-                        ),
+                    BottomNavigationNavBarItem(
+                        navController = navBarController,
                         selected = currentRoute == screen.route,
-                        alwaysShowLabel = true,
-                        label = {
-                            Text(text = screen.route)
-                        },
-                        onClick = {
-                            navController.navigate(screen.route) {
-                                popUpTo(navController.graph.startDestinationId)
-                                launchSingleTop = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = screen.icon,
-                                contentDescription = screen.route
-                            )
-                        },
+                        screen = screen
                     )
                 }
             }
@@ -64,6 +95,14 @@ fun BottomNavigationScreen(navController: NavHostController) {
         }
     )
     {
-        BottomNavigation(navController = navController)
+        BottomNavigation(navController = navBarController)
+    }
+}
+
+@Preview
+@Composable
+fun BottomNavigationScreen_Preview() {
+    ExpenseTrackerTheme {
+        BottomNavigationScreen(navController = rememberNavController())
     }
 }

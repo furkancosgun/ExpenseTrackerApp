@@ -12,7 +12,7 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ErrorColor
 @Composable
 fun AppOutlinedTextField(
     modifier: Modifier = Modifier,
-    label: String = "",
+    label: String,
     text: String,
     onTextChanged: (String) -> Unit,
     errorText: String? = null,

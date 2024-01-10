@@ -1,5 +1,6 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.resetpassword
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -84,6 +85,13 @@ fun ResetPasswordScreen(
             text = stringResource(R.string.reset_password)
         ) {
             viewModel.onEvent(ResetPasswordScreenEvent.Submit)
+        }
+    }
+    BackHandler {
+        navController.navigate(Screen.Auth.Login.route){
+            popUpTo(navController.graph.id){
+                inclusive = true
+            }
         }
     }
 }

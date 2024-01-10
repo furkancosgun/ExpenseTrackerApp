@@ -32,7 +32,6 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 import com.furkancosgun.expensetrackerapp.presentation.ui.login.LoginScreenTitle
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.LoginViewModel
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.KoinApplication
 
@@ -41,9 +40,12 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = koinVi
     val context = LocalContext.current
     LaunchedEffect(key1 = context) {
         viewModel.event.collect {
-            when(it){
+            when (it) {
                 is LoginViewModel.LoginViewModelEvent.Error -> TODO()
-                is LoginViewModel.LoginViewModelEvent.Success -> TODO()
+                is LoginViewModel.LoginViewModelEvent.Success -> {
+                    // TODO
+                    navController.navigate(Screen.App.route)
+                }
             }
         }
     }

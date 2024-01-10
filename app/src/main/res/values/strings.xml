@@ -32,5 +32,17 @@
     <string name="the_otp_code_must_be_d_characters_long">The otp code must be %d characters long</string>
     <string name="reset_password">Reset Password</string>
     <string name="set_the_new_password_for_your_account_so_you_can_login_and_access_all_the_features">Set the new password for your account so you can login and access all the features.</string>
+    <string name="add">add</string>
+    <string name="report_name">Report Name</string>
+    <string name="create_expense_report">Create Expense Report</string>
+    <string name="create_a_report_to_easily_track_your_expenses">Create a report to easily track your expenses.</string>
+    <string name="create">Create</string>
+    <string name="the_report_name_can_t_be_blank">The report name can\'t be blank</string>
+    <string name="report">Report</string>
+    <string name="expense">Expense</string>
+    <string name="create_an_expense_report_to_get_started">Create an expense report to get started</string>
+    <string name="no_expense_report_found">No expense report found!</string>
+    <string name="expense_report_created">Expense report created</string>
+    <string name="expense_report_submitted">Expense report submitted</string>
 
 </resources>

@@ -7,15 +7,14 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    val navBarController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.Welcome.route,
+        startDestination = Screen.App.route,
         route = Screen.Root.route
     ) {
         splashNavGraph(navController)
         authNavGraph(navController)
-        bottomNavGraph(navBarController)
+        appNavGraph(navController)
     }
 }
 

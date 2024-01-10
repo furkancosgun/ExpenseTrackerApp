@@ -1,5 +1,6 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.verifyaccount
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +28,6 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTh
 import com.furkancosgun.expensetrackerapp.presentation.ui.verifyaccount.VerifyAccountScreenTitle
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyAccountViewModel
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.scope.ScopeID
 
 @Composable
 fun VerifyAccountScreen(
@@ -37,9 +37,9 @@ fun VerifyAccountScreen(
     viewModel: VerifyAccountViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    LaunchedEffect(key1 = context){
-        viewModel.event.collect{
-            when(it){
+    LaunchedEffect(key1 = context) {
+        viewModel.event.collect {
+            when (it) {
                 is VerifyAccountViewModel.VerifyAccountViewModelEvent.Error -> TODO()
                 is VerifyAccountViewModel.VerifyAccountViewModelEvent.Success -> {
                     navController.navigate(next)

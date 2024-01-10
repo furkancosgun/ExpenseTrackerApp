@@ -3,6 +3,10 @@ package com.furkancosgun.expensetrackerapp.presentation.ui.common
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+object UIConstants {
+    val FAB_OFFSET_X = 0.dp
+    val FAB_OFFSET_Y = 40.dp
+}
 
 enum class UIPadding(val size: Dp) {
     LARGE(16.dp),
