@@ -9,7 +9,9 @@ import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateRepeatedPasswor
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateReportNameUseCase
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateReportViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.HomeScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.LoginViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.MainScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.RegisterViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ResetPasswordViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyAccountViewModel
@@ -30,4 +32,6 @@ val AppModule = module {
     viewModel { VerifyAccountViewModel(get()) }
     viewModel { ResetPasswordViewModel(get(), get()) }
     viewModel { CreateReportViewModel(get()) }
+    viewModel { MainScreenViewModel() }
+    viewModel { HomeScreenViewModel() }
 }

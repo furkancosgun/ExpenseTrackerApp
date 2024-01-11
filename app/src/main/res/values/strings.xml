@@ -51,5 +51,8 @@
     <string name="voice_recognition">Voice recognition</string>
     <string name="create_expense_with_manual">Create Expense With Manual</string>
     <string name="you_can_record_your_expenses_in_detail">You can record your expenses in detail.</string>
+    <string name="search">Search</string>
+    <string name="not_submitted">Not Submitted</string>
+    <string name="s_expense">%d Expense</string>
 
 </resources>
