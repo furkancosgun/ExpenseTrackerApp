@@ -11,6 +11,7 @@ class CreateManualExpenseScreenViewModel : ViewModel() {
     var state by mutableStateOf(CreateManualExpenseScreenState())
         private set
 
+
     fun onEvent(event: CreateManualExpenseEvent) {
         when (event) {
             is CreateManualExpenseEvent.AmountChanged -> {
@@ -41,7 +42,12 @@ class CreateManualExpenseScreenViewModel : ViewModel() {
 
             }
 
+            is CreateManualExpenseEvent.IncludeVatChanged -> {
+                state = state.copy(includeVat = event.includeVat)
+            }
 
+            is CreateManualExpenseEvent.CreateCategory -> TODO()
+            is CreateManualExpenseEvent.UploadImage -> TODO()
         }
     }
 }

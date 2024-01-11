@@ -7,5 +7,8 @@ sealed class CreateManualExpenseEvent {
     data class DescriptionChanged(val description: String) : CreateManualExpenseEvent()
     data class CategoryChanged(val category: String) : CreateManualExpenseEvent()
     data class VatChanged(val vat: Double) : CreateManualExpenseEvent()
+    data class IncludeVatChanged(val includeVat: Boolean) : CreateManualExpenseEvent()
     data object Submit : CreateManualExpenseEvent()
+    data object CreateCategory : CreateManualExpenseEvent()
+    data object UploadImage : CreateManualExpenseEvent()
 }
