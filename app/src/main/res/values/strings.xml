@@ -32,7 +32,6 @@
     <string name="the_otp_code_must_be_d_characters_long">The otp code must be %d characters long</string>
     <string name="reset_password">Reset Password</string>
     <string name="set_the_new_password_for_your_account_so_you_can_login_and_access_all_the_features">Set the new password for your account so you can login and access all the features.</string>
-    <string name="add">add</string>
     <string name="report_name">Report Name</string>
     <string name="create_expense_report">Create Expense Report</string>
     <string name="create_a_report_to_easily_track_your_expenses">Create a report to easily track your expenses.</string>
@@ -44,5 +43,13 @@
     <string name="no_expense_report_found">No expense report found!</string>
     <string name="expense_report_created">Expense report created</string>
     <string name="expense_report_submitted">Expense report submitted</string>
+    <string name="how_do_you_want_to_input_your_expense">How do you want to input your expense?</string>
+    <string name="choose_expense_type">Choose Expense Type</string>
+    <string name="continue_it">Continue</string>
+    <string name="manual_input">Manual input</string>
+    <string name="scan_receipt">Scan receipt</string>
+    <string name="voice_recognition">Voice recognition</string>
+    <string name="create_expense_with_manual">Create Expense With Manual</string>
+    <string name="you_can_record_your_expenses_in_detail">You can record your expenses in detail.</string>
 
 </resources>

@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.furkancosgun.expensetrackerapp.presentation.navigation.AppNavigation
+import com.furkancosgun.expensetrackerapp.presentation.navigation.navhost.ApplicationNavigation
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavigation()
+                    ApplicationNavigation()
                 }
             }
         }

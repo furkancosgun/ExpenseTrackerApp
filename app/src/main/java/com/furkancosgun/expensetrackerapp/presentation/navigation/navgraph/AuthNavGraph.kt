@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.navigation
+package com.furkancosgun.expensetrackerapp.presentation.navigation.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword.ForgotPasswordScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.login.LoginScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.register.RegisterScreen
@@ -34,8 +35,8 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
                 }
             )
         ) {
-            val email = it.arguments?.getString("email") ?: ""
-            val next = it.arguments?.getString("next") ?: ""
+            val email = it.arguments?.getString("email")!!
+            val next = it.arguments?.getString("next")!!
             VerifyAccountScreen(navController = navController, email = email, next = next)
         }
         composable(route = Screen.Auth.ResetPassword.route,

@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.ui.bottomnavigation
+package com.furkancosgun.expensetrackerapp.presentation.ui.main
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon
@@ -15,7 +15,7 @@ import com.furkancosgun.expensetrackerapp.presentation.navigation.BottomNavScree
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
 
 @Composable
-fun RowScope.BottomNavigationNavBarItem(
+fun RowScope.MainScreenNavBarItem(
     modifier: Modifier = Modifier,
     navController: NavController,
     selected: Boolean,

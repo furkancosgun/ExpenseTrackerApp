@@ -1,9 +1,10 @@
-package com.furkancosgun.expensetrackerapp.presentation.navigation
+package com.furkancosgun.expensetrackerapp.presentation.navigation.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.screen.splash.SplashScreen
 
 fun NavGraphBuilder.splashNavGraph(navController: NavHostController) {

@@ -3,7 +3,6 @@ package com.furkancosgun.expensetrackerapp.presentation.ui.home
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -22,14 +21,13 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
-            .fillMaxHeight(0.15f)
     ) {
         Card(
             modifier = Modifier
                 .fillMaxWidth(0.5f)
                 .padding(UIPadding.MEDIUM.size),
             colors = CardDefaults.cardColors(containerColor = Color.Unspecified),
-            border = BorderStroke(0.5.dp, Color.Gray)
+            border = BorderStroke(1.dp, Color.Gray)
         ) {
             Column(modifier = Modifier.padding(UIPadding.MEDIUM.size)) {
                 Text(text = "0", style = MaterialTheme.typography.titleMedium)
@@ -41,7 +39,7 @@ fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier) {
                 .fillMaxWidth(1f)
                 .padding(UIPadding.MEDIUM.size),
             colors = CardDefaults.cardColors(containerColor = Color.Unspecified),
-            border = BorderStroke(0.5.dp, Color.Gray)
+            border = BorderStroke(1.dp, Color.Gray)
         ) {
             Column(modifier = Modifier.padding(UIPadding.MEDIUM.size)) {
                 Text(text = "0", style = MaterialTheme.typography.titleMedium)

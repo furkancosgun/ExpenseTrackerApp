@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.ui.bottomnavigation
+package com.furkancosgun.expensetrackerapp.presentation.ui.main
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
 
 @Composable
-fun AppFloatingActionButton(
+fun MainScreenFABItem(
     modifier: Modifier = Modifier,
     icon: ImageVector,
     contentDescription: String? = null,

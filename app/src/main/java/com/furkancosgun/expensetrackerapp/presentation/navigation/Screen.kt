@@ -31,4 +31,3 @@ sealed class BottomNavScreen(val route: String, val icon: ImageVector) {
     data object Home : BottomNavScreen("home", icon = Icons.Default.Home)
     data object Settings : BottomNavScreen("settings", icon = Icons.Default.Settings)
 }
-
