@@ -55,7 +55,7 @@ fun ChooseExpenseScreen(
         AppButton(
             modifier = Modifier.fillMaxWidth(), text = stringResource(R.string.continue_it),
         ) {
-            navController.navigate("")
+            navController.navigate(viewModel.state.expenseType.screen.route)
         }
     }
 }

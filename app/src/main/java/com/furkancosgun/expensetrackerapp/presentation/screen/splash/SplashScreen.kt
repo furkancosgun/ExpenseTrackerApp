@@ -24,7 +24,6 @@ fun SplashScreen(
     userSessionManagerRepository: UserSessionManagerRepository = koinInject()
 ) {
     LaunchedEffect(key1 = true) {
-        userSessionManagerRepository.logoutUser()
         delay(3000L)
         if (userSessionManagerRepository.isLoggedIn()) {
             userSessionManagerRepository.getUser()

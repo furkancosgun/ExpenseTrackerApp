@@ -58,5 +58,16 @@
     <string name="network_error">Network error</string>
     <string name="http_error">HTTP error: %s</string>
     <string name="an_unexpected_error_occurred">An unexpected error occurred</string>
+    <string name="merchant_name">Merchant Name</string>
+    <string name="amount">Amount</string>
+    <string name="_12_12_2012">12/12/2012</string>
+    <string name="description">Description</string>
+    <string name="category">Category</string>
+    <string name="create_category">Create Category</string>
+    <string name="include_vat_tax">Include VAT Tax</string>
+    <string name="vat_tax">VAT Tax</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="save_expense">Save Expense</string>
+    <string name="expense_photo">Expense Photo</string>
 
 </resources>

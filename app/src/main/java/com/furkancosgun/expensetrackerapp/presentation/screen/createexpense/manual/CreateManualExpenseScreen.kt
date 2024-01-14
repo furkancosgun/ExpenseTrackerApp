@@ -5,8 +5,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -49,12 +51,12 @@ fun CreateManualExpenseScreen(
     viewModel: CreateManualExpenseScreenViewModel = koinViewModel()
 ) {
 
-    Scaffold { pad ->
+    Scaffold { it ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(pad)
+                .padding(it)
                 .padding(UIPadding.MEDIUM.size)
         ) {
             Text(
@@ -64,22 +66,24 @@ fun CreateManualExpenseScreen(
             )
             Text(text = stringResource(R.string.you_can_record_your_expenses_in_detail))
 
+            Spacer(modifier = Modifier.height(UISpacing.LARGE.size))
+
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Merchant Name",
+                label = stringResource(R.string.merchant_name),
                 text = viewModel.state.merchantName,
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseEvent.MerchantNameChanged(it))
+                    viewModel.onEvent(CreateManualExpenseScreenEvent.MerchantNameChanged(it))
                 },
                 icon = Icons.Default.PushPin,
                 errorText = viewModel.state.merchantNameError
             )
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Amount",
+                label = stringResource(R.string.amount),
                 text = viewModel.state.amount.toString(),
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseEvent.AmountChanged(it.toDouble()))
+                    viewModel.onEvent(CreateManualExpenseScreenEvent.AmountChanged(it.toDouble()))
                 },
                 icon = Icons.Default.AttachMoney,
                 keyboardType = KeyboardType.Decimal,
@@ -87,10 +91,10 @@ fun CreateManualExpenseScreen(
             )
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "12/12/2012",
+                label = stringResource(R.string._12_12_2012),
                 text = viewModel.state.date,
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseEvent.DateChanged(it))
+                    viewModel.onEvent(CreateManualExpenseScreenEvent.DateChanged(it))
                 },
                 icon = Icons.Default.DateRange,
                 keyboardType = KeyboardType.Number,
@@ -98,36 +102,39 @@ fun CreateManualExpenseScreen(
             )
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Description",
+                label = stringResource(R.string.description),
                 text = viewModel.state.description,
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseEvent.DescriptionChanged(it))
+                    viewModel.onEvent(CreateManualExpenseScreenEvent.DescriptionChanged(it))
                 },
                 icon = Icons.Default.Description
             )
             AppOutlinedMenuField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Category",
+                label = stringResource(R.string.category),
             )
-            AppTextButton(modifier = Modifier.fillMaxWidth(), text = "Create Category") {
-                viewModel.onEvent(CreateManualExpenseEvent.CreateCategory)
+            AppTextButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(R.string.create_category)
+            ) {
+                viewModel.onEvent(CreateManualExpenseScreenEvent.CreateCategory)
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(UISpacing.MEDIUM.size)
             ) {
                 Switch(checked = viewModel.state.includeVat, onCheckedChange = {
-                    viewModel.onEvent(CreateManualExpenseEvent.IncludeVatChanged(it))
+                    viewModel.onEvent(CreateManualExpenseScreenEvent.IncludeVatChanged(it))
                 })
-                Text(text = "Include VAT Tax")
+                Text(text = stringResource(R.string.include_vat_tax))
             }
             AnimatedVisibility(visible = viewModel.state.includeVat) {
                 AppOutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    label = "VAT Tax",
+                    label = stringResource(R.string.vat_tax),
                     text = viewModel.state.vat.toString(),
                     onTextChanged = {
-                        viewModel.onEvent(CreateManualExpenseEvent.VatChanged(it.toDouble()))
+                        viewModel.onEvent(CreateManualExpenseScreenEvent.VatChanged(it.toDouble()))
                     },
                     icon = Icons.Default.AttachMoney,
                     keyboardType = KeyboardType.Decimal
@@ -138,22 +145,22 @@ fun CreateManualExpenseScreen(
                 Image(
                     modifier = Modifier.fillMaxWidth(),
                     bitmap = viewModel.state.uploadedImage ?: ImageBitmap(1, 1),
-                    contentDescription = "PHOTO",
+                    contentDescription = stringResource(R.string.expense_photo),
                     contentScale = ContentScale.FillWidth
                 )
             }
             AppButton(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Upload Image"
+                text = stringResource(R.string.upload_image)
             ) {
-                viewModel.onEvent(CreateManualExpenseEvent.UploadImage)
+                viewModel.onEvent(CreateManualExpenseScreenEvent.UploadImage)
             }
 
             AppButton(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Save Expense"
+                text = stringResource(R.string.save_expense)
             ) {
-                viewModel.onEvent(CreateManualExpenseEvent.Submit)
+                viewModel.onEvent(CreateManualExpenseScreenEvent.Submit)
             }
         }
     }

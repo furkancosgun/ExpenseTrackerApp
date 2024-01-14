@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.furkancosgun.expensetrackerapp.R
-import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedTextField
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 import com.furkancosgun.expensetrackerapp.presentation.ui.home.HomeScreenProjectItem
@@ -36,9 +35,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenViewModel = ko
     ) {
         HomeScreenReportAndExpenseStatus()
         if (viewModel.state.recentExpenseReports.isEmpty()) {
-            HomeScreenReportNotFoundContent(onClick = {
-                navController.navigate(Screen.App.CreateReport.route)
-            })
+            HomeScreenReportNotFoundContent()
         } else {
             HomeScreenRecentExpenseReportTitle()
             AppOutlinedTextField(

@@ -40,7 +40,7 @@ fun MainScreenFAB(
                     icon = Icons.Default.FileOpen,
                     contentDescription = stringResource(R.string.expense),
                 ) {
-                    navController.navigate(Screen.App.CreateExpense.route)
+                    navController.navigate(Screen.App.ChooseExpenseType.route)
                 }
             }
         }

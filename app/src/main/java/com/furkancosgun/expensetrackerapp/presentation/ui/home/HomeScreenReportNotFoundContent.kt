@@ -13,11 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.furkancosgun.expensetrackerapp.R
-import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UISpacing
 
 @Composable
-fun HomeScreenReportNotFoundContent(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun HomeScreenReportNotFoundContent(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxHeight(0.7f)
@@ -31,12 +30,5 @@ fun HomeScreenReportNotFoundContent(modifier: Modifier = Modifier, onClick: () -
         )
         Spacer(modifier = Modifier.height(UISpacing.MEDIUM.size))
         Text(text = stringResource(R.string.create_an_expense_report_to_get_started))
-
-        Spacer(modifier = Modifier.height(UISpacing.EXTRA_LARGE.size))
-        AppButton(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.create_expense_report),
-            onClick = onClick
-        )
     }
 }
