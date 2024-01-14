@@ -12,6 +12,7 @@ import com.furkancosgun.expensetrackerapp.presentation.screen.login.LoginScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.register.RegisterScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.resetpassword.ResetPasswordScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.verifyaccount.VerifyAccountScreen
+import com.furkancosgun.expensetrackerapp.presentation.screen.verifyresetpassword.VerifyResetPasswordScreen
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
     navigation(startDestination = Screen.Auth.Login.route, route = Screen.Auth.route) {
@@ -30,20 +31,31 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
                 navArgument("email") {
                     type = NavType.StringType
                 },
-                navArgument("next") {
-                    type = NavType.StringType
-                }
             )
         ) {
             val email = it.arguments?.getString("email")!!
-            val next = it.arguments?.getString("next")!!
-            VerifyAccountScreen(navController = navController, email = email, next = next)
+            VerifyAccountScreen(navController = navController, email = email)
         }
-        composable(route = Screen.Auth.ResetPassword.route,
+        composable(
+            route = Screen.Auth.VerifyResetPassword.route,
             arguments = listOf(
                 navArgument("email") {
                     type = NavType.StringType
-                }
+                },
+            )
+        ) {
+            val email = it.arguments?.getString("email")!!
+            VerifyResetPasswordScreen(navController = navController, email = email)
+        }
+        composable(
+            route = Screen.Auth.ResetPassword.route,
+            arguments = listOf(
+                navArgument("email") {
+                    type = NavType.StringType
+                },
+                navArgument("otp") {
+                    type = NavType.StringType
+                },
             )
         ) {
             ResetPasswordScreen(navController = navController)

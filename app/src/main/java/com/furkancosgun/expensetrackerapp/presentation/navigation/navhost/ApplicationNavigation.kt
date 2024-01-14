@@ -13,7 +13,7 @@ fun ApplicationNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.App.route,
+        startDestination = Screen.Welcome.route,
         route = Screen.Root.route
     ) {
         splashNavGraph(navController)

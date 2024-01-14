@@ -28,6 +28,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(navController: NavController, viewModel: HomeScreenViewModel = koinViewModel()) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()

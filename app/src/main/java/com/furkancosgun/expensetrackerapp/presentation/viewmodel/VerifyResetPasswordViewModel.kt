@@ -10,29 +10,29 @@ import com.furkancosgun.expensetrackerapp.data.model.request.VerifyAccountReques
 import com.furkancosgun.expensetrackerapp.data.repository.RetrofitAuthDataSource
 import com.furkancosgun.expensetrackerapp.data.repository.httpRequestHandler
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateOtpCodeUseCase
-import com.furkancosgun.expensetrackerapp.presentation.screen.verifyaccount.VerifyAccountScreenEvent
-import com.furkancosgun.expensetrackerapp.presentation.screen.verifyaccount.VerifyAccountScreenState
+import com.furkancosgun.expensetrackerapp.presentation.screen.verifyresetpassword.VerifyResetPasswordScreenEvent
+import com.furkancosgun.expensetrackerapp.presentation.screen.verifyresetpassword.VerifyResetPasswordScreenState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class VerifyAccountViewModel(
+class VerifyResetPasswordViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val validateOtpCodeUseCase: ValidateOtpCodeUseCase,
     private val authDataSource: RetrofitAuthDataSource,
 ) : ViewModel() {
-    var state by mutableStateOf(VerifyAccountScreenState())
+    var state by mutableStateOf(VerifyResetPasswordScreenState())
         private set
-    private val eventChannel = Channel<VerifyAccountViewModelEvent>()
+    private val eventChannel = Channel<VerifyResetPasswordViewModelEvent>()
     val event = eventChannel.receiveAsFlow()
 
-    fun onEvent(event: VerifyAccountScreenEvent) {
+    fun onEvent(event: VerifyResetPasswordScreenEvent) {
         when (event) {
-            is VerifyAccountScreenEvent.OtpCodeChanged -> {
+            is VerifyResetPasswordScreenEvent.OtpCodeChanged -> {
                 state = state.copy(otpCode = event.otpCode)
             }
 
-            is VerifyAccountScreenEvent.Submit -> {
+            is VerifyResetPasswordScreenEvent.Submit -> {
                 submitData()
             }
         }
@@ -56,24 +56,24 @@ class VerifyAccountViewModel(
             authDataSource.verifyAccount(
                 VerifyAccountRequest(
                     email = email,
-                    otp = state.otpCode
+                    otp = state.otpCode,
                 )
             )
         }, onSuccess = { _ ->
-            sendEvent(VerifyAccountViewModelEvent.Success)
+            sendEvent(VerifyResetPasswordViewModelEvent.Success)
         }, onError = { errorMessage ->
-            sendEvent(VerifyAccountViewModelEvent.Error(errorMessage))
+            sendEvent(VerifyResetPasswordViewModelEvent.Error(errorMessage))
         })
     }
 
-    private fun sendEvent(event: VerifyAccountViewModelEvent) {
+    private fun sendEvent(event: VerifyResetPasswordViewModelEvent) {
         viewModelScope.launch {
             eventChannel.send(event)
         }
     }
 
-    sealed class VerifyAccountViewModelEvent {
-        data object Success : VerifyAccountViewModelEvent()
-        data class Error(val error: String) : VerifyAccountViewModelEvent()
+    sealed class VerifyResetPasswordViewModelEvent {
+        data object Success : VerifyResetPasswordViewModelEvent()
+        data class Error(val error: String) : VerifyResetPasswordViewModelEvent()
     }
 }

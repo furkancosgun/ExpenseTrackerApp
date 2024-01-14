@@ -1,5 +1,8 @@
 package com.furkancosgun.expensetrackerapp.di
 
+import android.content.Context
+import com.furkancosgun.expensetrackerapp.data.repository.RetrofitAuthDataSource
+import com.furkancosgun.expensetrackerapp.data.repository.UserSessionManagerRepository
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateEmailUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateFirstNameUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateLastNameUseCase
@@ -15,10 +18,13 @@ import com.furkancosgun.expensetrackerapp.presentation.viewmodel.MainScreenViewM
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.RegisterViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ResetPasswordViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyAccountViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyResetPasswordViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val AppModule = module {
+    //Validation
     single { ValidateFirstNameUseCase(get()) }
     single { ValidateLastNameUseCase(get()) }
     single { ValidateEmailUseCase(get()) }
@@ -26,12 +32,25 @@ val AppModule = module {
     single { ValidateRepeatedPasswordUseCase(get()) }
     single { ValidateOtpCodeUseCase(get()) }
     single { ValidateReportNameUseCase(get()) }
-    viewModel { LoginViewModel(get(), get()) }
-    viewModel { RegisterViewModel(get(), get(), get(), get(), get()) }
-    viewModel { ForgotPasswordViewModel(get()) }
-    viewModel { VerifyAccountViewModel(get()) }
-    viewModel { ResetPasswordViewModel(get(), get()) }
+
+    //ViewModel
+    viewModel { LoginViewModel(get(), get(), get(), get()) }
+    viewModel { RegisterViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { ForgotPasswordViewModel(get(), get()) }
+    viewModel { VerifyAccountViewModel(get(), get(), get()) }
+    viewModel { VerifyResetPasswordViewModel(get(), get(), get()) }
+    viewModel { ResetPasswordViewModel(get(), get(), get(), get()) }
     viewModel { CreateReportViewModel(get()) }
     viewModel { MainScreenViewModel() }
     viewModel { HomeScreenViewModel() }
+
+    //Repositories
+    single { RetrofitAuthDataSource() }
+    single {
+        UserSessionManagerRepository(
+            sharedPreferences = androidContext().getSharedPreferences(
+                "default", Context.MODE_PRIVATE
+            )
+        )
+    }
 }

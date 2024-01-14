@@ -5,6 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.furkancosgun.expensetrackerapp.data.model.request.ForgotPasswordRequest
+import com.furkancosgun.expensetrackerapp.data.repository.RetrofitAuthDataSource
+import com.furkancosgun.expensetrackerapp.data.repository.httpRequestHandler
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateEmailUseCase
 import com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword.ForgotPasswordScreenEvent
 import com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword.ForgotPasswordScreenState
@@ -13,7 +16,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class ForgotPasswordViewModel(
-    private val validateEmailUseCase: ValidateEmailUseCase
+    private val validateEmailUseCase: ValidateEmailUseCase,
+    private val authDataSource: RetrofitAuthDataSource
 ) : ViewModel() {
     var state by mutableStateOf(ForgotPasswordScreenState())
         private set
@@ -27,16 +31,38 @@ class ForgotPasswordViewModel(
             }
 
             is ForgotPasswordScreenEvent.Submit -> {
-                val emailUseCaseResult = validateEmailUseCase(state.email)
-
-                state = state.copy(emailError = emailUseCaseResult.errorMessage)
-
-                if (!emailUseCaseResult.successful) return
-
-                viewModelScope.launch {
-                    eventChannel.send(ForgotPasswordViewModelEvent.Success)
-                }
+                submitData()
             }
+        }
+    }
+
+    private fun submitData() {
+        val emailUseCaseResult = validateEmailUseCase(state.email)
+
+        state = state.copy(emailError = emailUseCaseResult.errorMessage)
+
+        if (!emailUseCaseResult.successful) return
+
+        viewModelScope.launch {
+            verifyAccountRequest()
+        }
+    }
+
+    private suspend fun verifyAccountRequest() {
+        httpRequestHandler(request = {
+            authDataSource.forgotPassword(
+                ForgotPasswordRequest(state.email)
+            )
+        }, onSuccess = { _ ->
+            sendEvent(ForgotPasswordViewModelEvent.Success)
+        }, onError = { errorMessage ->
+            sendEvent(ForgotPasswordViewModelEvent.Error(errorMessage))
+        })
+    }
+
+    private fun sendEvent(event: ForgotPasswordViewModelEvent) {
+        viewModelScope.launch {
+            eventChannel.send(event)
         }
     }
 

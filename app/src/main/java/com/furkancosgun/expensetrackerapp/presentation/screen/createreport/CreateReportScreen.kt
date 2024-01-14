@@ -64,6 +64,8 @@ fun CreateReportScreen(navController: NavController,viewModel: CreateReportViewM
         ) {
             viewModel.onEvent(CreateReportScreenEvent.Submit)
         }
+        AppButton(text = "asd") {
+        }
     }
 }
 

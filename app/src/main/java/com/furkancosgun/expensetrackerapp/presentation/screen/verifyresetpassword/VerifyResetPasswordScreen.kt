@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.screen.forgotpassword
+package com.furkancosgun.expensetrackerapp.presentation.screen.verifyresetpassword
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
@@ -18,34 +16,37 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.furkancosgun.expensetrackerapp.R
+import com.furkancosgun.expensetrackerapp.domain.common.AppConstants
 import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppButton
-import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedTextField
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
-import com.furkancosgun.expensetrackerapp.presentation.ui.forgotpassword.ForgotPasswordTitle
-import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
+import com.furkancosgun.expensetrackerapp.presentation.ui.common.UISpacing
+import com.furkancosgun.expensetrackerapp.presentation.ui.otp.OtpTextField
+import com.furkancosgun.expensetrackerapp.presentation.ui.verifyaccount.VerifyAccountScreenTitle
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyResetPasswordViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ForgotPasswordScreen(
+fun VerifyResetPasswordScreen(
     navController: NavController,
-    viewModel: ForgotPasswordViewModel = koinViewModel()
+    email: String,
+    viewModel: VerifyResetPasswordViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = context) {
         viewModel.event.collect {
             when (it) {
-                is ForgotPasswordViewModel.ForgotPasswordViewModelEvent.Error -> {
+                is VerifyResetPasswordViewModel.VerifyResetPasswordViewModelEvent.Error -> {
                     viewModel.state.snackBarHostState.showSnackbar(it.error)
                 }
 
-                is ForgotPasswordViewModel.ForgotPasswordViewModelEvent.Success -> {
-                    navController.navigate(
-                        Screen.Auth.VerifyResetPassword.route.replace(
-                            oldValue = "{email}",
-                            newValue = viewModel.state.email
-                        )
+                is VerifyResetPasswordViewModel.VerifyResetPasswordViewModelEvent.Success -> {
+                    var route = Screen.Auth.ResetPassword.route.replace(
+                        oldValue = "{email}",
+                        newValue = email
                     )
+                    route = route.replace(oldValue = "{otp}", newValue = viewModel.state.otpCode)
+                    navController.navigate(route)
                 }
             }
         }
@@ -60,24 +61,26 @@ fun ForgotPasswordScreen(
                 .fillMaxSize()
                 .padding(it)
                 .padding(UIPadding.MEDIUM.size),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Center
         ) {
-            ForgotPasswordTitle()
+            VerifyAccountScreenTitle(email = email)
             Spacer(modifier = Modifier.height(UIPadding.LARGE.size))
-            AppOutlinedTextField(
+            OtpTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = stringResource(id = R.string.email),
-                text = viewModel.state.email,
-                onTextChanged = {
-                    viewModel.onEvent(ForgotPasswordScreenEvent.EmailChanged(it))
+                otpText = viewModel.state.otpCode,
+                onOtpTextChange = {
+                    viewModel.onEvent(VerifyResetPasswordScreenEvent.OtpCodeChanged(it))
                 },
-                icon = Icons.Default.Email,
-                errorText = viewModel.state.emailError
+                otpCount = AppConstants.OTP_CODE_LENGTH,
+                errorText = viewModel.state.otpCodeError
             )
-            AppButton(modifier = Modifier.fillMaxWidth(), text = stringResource(R.string.send)) {
-                viewModel.onEvent(ForgotPasswordScreenEvent.Submit)
+            Spacer(modifier = Modifier.height(UISpacing.MEDIUM.size))
+            AppButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(R.string.verify)
+            ) {
+                viewModel.onEvent(VerifyResetPasswordScreenEvent.Submit)
             }
         }
     }
 }
-
