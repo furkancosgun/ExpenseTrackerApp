@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.screen.chooseexpensetype
+package com.furkancosgun.expensetrackerapp.domain.model
 
 import androidx.annotation.StringRes
 import com.furkancosgun.expensetrackerapp.R

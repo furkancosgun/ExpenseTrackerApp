@@ -1,5 +1,7 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual
 
+import android.net.Uri
+
 sealed class CreateManualExpenseScreenEvent {
     data class MerchantNameChanged(val merchantName: String) : CreateManualExpenseScreenEvent()
     data class AmountChanged(val amount: Double) : CreateManualExpenseScreenEvent()
@@ -10,5 +12,5 @@ sealed class CreateManualExpenseScreenEvent {
     data class IncludeVatChanged(val includeVat: Boolean) : CreateManualExpenseScreenEvent()
     data object Submit : CreateManualExpenseScreenEvent()
     data object CreateCategory : CreateManualExpenseScreenEvent()
-    data object UploadImage : CreateManualExpenseScreenEvent()
+    data class UploadImage(val uri: Uri) : CreateManualExpenseScreenEvent()
 }

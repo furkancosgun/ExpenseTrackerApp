@@ -1,5 +1,7 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.chooseexpensetype
 
-data class ChooseExpenseScreenState(
+import com.furkancosgun.expensetrackerapp.domain.model.ExpenseType
+
+data class ChooseExpenseTypeScreenState(
     val expenseType: ExpenseType = ExpenseType.Manual
 )

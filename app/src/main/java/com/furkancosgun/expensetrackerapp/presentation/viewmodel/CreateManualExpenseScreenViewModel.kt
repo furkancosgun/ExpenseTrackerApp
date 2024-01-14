@@ -6,11 +6,15 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual.CreateManualExpenseScreenEvent
 import com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual.CreateManualExpenseScreenState
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 
 class CreateManualExpenseScreenViewModel : ViewModel() {
     var state by mutableStateOf(CreateManualExpenseScreenState())
         private set
 
+    private val eventChannel = Channel<CreateManualExpenseScreenViewModelEvent>()
+    val event = eventChannel.receiveAsFlow()
 
     fun onEvent(event: CreateManualExpenseScreenEvent) {
         when (event) {
@@ -51,8 +55,13 @@ class CreateManualExpenseScreenViewModel : ViewModel() {
             }
 
             is CreateManualExpenseScreenEvent.UploadImage -> {
-
+                state = state.copy(uploadedImage = event.uri)
             }
         }
+    }
+
+    sealed class CreateManualExpenseScreenViewModelEvent {
+        data object Success : CreateManualExpenseScreenViewModelEvent()
+        data class Error(val error: String) : CreateManualExpenseScreenViewModelEvent()
     }
 }

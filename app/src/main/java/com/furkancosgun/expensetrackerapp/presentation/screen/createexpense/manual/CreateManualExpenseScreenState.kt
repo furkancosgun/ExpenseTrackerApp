@@ -1,6 +1,7 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual
 
-import androidx.compose.ui.graphics.ImageBitmap
+import android.net.Uri
+import androidx.compose.material3.SnackbarHostState
 
 data class CreateManualExpenseScreenState(
     val categories: List<String> = mutableListOf("Food", "Travel"),
@@ -14,5 +15,6 @@ data class CreateManualExpenseScreenState(
     val category: String = "",
     val includeVat: Boolean = false,
     val vat: Double = 0.0,
-    val uploadedImage: ImageBitmap? = null,
+    val uploadedImage: Uri? = null,
+    val snackBarHostState: SnackbarHostState = SnackbarHostState()
 )
