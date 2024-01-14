@@ -51,7 +51,7 @@ class CreateManualExpenseScreenViewModel : ViewModel() {
             }
 
             is CreateManualExpenseScreenEvent.CreateCategory -> {
-
+                state = state.copy(isOpenCategoryAlert = !state.isOpenCategoryAlert)
             }
 
             is CreateManualExpenseScreenEvent.UploadImage -> {

@@ -16,5 +16,6 @@ data class CreateManualExpenseScreenState(
     val includeVat: Boolean = false,
     val vat: Double = 0.0,
     val uploadedImage: Uri? = null,
-    val snackBarHostState: SnackbarHostState = SnackbarHostState()
+    val snackBarHostState: SnackbarHostState = SnackbarHostState(),
+    val isOpenCategoryAlert: Boolean = false
 )

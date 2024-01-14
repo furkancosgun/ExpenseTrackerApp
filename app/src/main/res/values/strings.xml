@@ -69,5 +69,11 @@
     <string name="upload_image">Upload Image</string>
     <string name="save_expense">Save Expense</string>
     <string name="expense_photo">Expense Photo</string>
+    <string name="category_icon">Category Icon</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="enter_category_name">Enter Category Name</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="the_category_can_t_be_empty">The category can\'t be empty</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.furkancosgun.expensetrackerapp.di
 import android.content.Context
 import com.furkancosgun.expensetrackerapp.data.repository.RetrofitAuthDataSource
 import com.furkancosgun.expensetrackerapp.data.repository.UserSessionManagerRepository
+import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateCategoryUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateEmailUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateFirstNameUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateLastNameUseCase
@@ -11,6 +12,7 @@ import com.furkancosgun.expensetrackerapp.domain.usecase.ValidatePasswordUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateRepeatedPasswordUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateReportNameUseCase
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ChooseExpenseScreenViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateCategoryViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateManualExpenseScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateReportViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
@@ -34,6 +36,7 @@ val AppModule = module {
     single { ValidateRepeatedPasswordUseCase(get()) }
     single { ValidateOtpCodeUseCase(get()) }
     single { ValidateReportNameUseCase(get()) }
+    single { ValidateCategoryUseCase(get()) }
 
     //ViewModel
     viewModel { LoginViewModel(get(), get(), get(), get()) }
@@ -47,6 +50,7 @@ val AppModule = module {
     viewModel { HomeScreenViewModel() }
     viewModel { ChooseExpenseScreenViewModel() }
     viewModel { CreateManualExpenseScreenViewModel() }
+    viewModel { CreateCategoryViewModel(get()) }
 
     //Repositories
     single { RetrofitAuthDataSource() }

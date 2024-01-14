@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.furkancosgun.expensetrackerapp.R
+import com.furkancosgun.expensetrackerapp.presentation.screen.createcategory.CreateCategoryAlert
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedMenuField
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedTextField
@@ -85,6 +86,11 @@ fun CreateManualExpenseScreen(
             SnackbarHost(hostState = viewModel.state.snackBarHostState)
         }
     ) { it ->
+        if (viewModel.state.isOpenCategoryAlert) {
+            CreateCategoryAlert(anyButtonClicked = {
+                viewModel.onEvent(CreateManualExpenseScreenEvent.CreateCategory)
+            })
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
