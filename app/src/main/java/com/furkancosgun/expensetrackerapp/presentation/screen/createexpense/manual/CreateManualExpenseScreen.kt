@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.furkancosgun.expensetrackerapp.R
+import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.screen.createcategory.CreateCategoryAlert
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedMenuField
@@ -75,7 +76,11 @@ fun CreateManualExpenseScreen(
                 }
 
                 is CreateManualExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Success -> {
-
+                    navController.navigate(Screen.App.Base.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
                 }
             }
         }

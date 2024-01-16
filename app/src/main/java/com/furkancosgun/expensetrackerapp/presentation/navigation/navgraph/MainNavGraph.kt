@@ -7,6 +7,7 @@ import androidx.navigation.navigation
 import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.screen.chooseexpensetype.ChooseExpenseTypeScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual.CreateManualExpenseScreen
+import com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.scan.CreateScanExpenseScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.createreport.CreateReportScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.main.MainScreen
 
@@ -26,7 +27,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
             CreateManualExpenseScreen(navController = navController)
         }
         composable(route = Screen.App.ChooseExpenseType.Scan.route) {
-            //  ChooseExpenseScreen(navController = navController)
+            CreateScanExpenseScreen(navController = navController)
         }
         composable(route = Screen.App.ChooseExpenseType.Voice.route) {
             //ChooseExpenseScreen(navController = navController)

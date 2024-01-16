@@ -22,8 +22,6 @@ import com.furkancosgun.expensetrackerapp.domain.model.RecentExpenseReport
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppTextButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
-import com.furkancosgun.expensetrackerapp.presentation.ui.theme.Yellow050
-import com.furkancosgun.expensetrackerapp.presentation.ui.theme.Yellow600
 
 @Composable
 fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentExpenseReport) {
@@ -42,29 +40,14 @@ fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentEx
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = expenseReport.title, style = MaterialTheme.typography.titleMedium)
-                if (!expenseReport.isSubmitted) {
-                    Card(
-                        colors = CardDefaults.cardColors(
-                            containerColor = Yellow050
-                        )
-                    ) {
-                        Text(
-                            modifier = Modifier.padding(UIPadding.SMALL.size),
-                            text = stringResource(
-                                R.string.not_submitted
-                            ),
-                            color = Yellow600,
-                            style = MaterialTheme.typography.titleSmall
-                        )
-                    }
-                }
+
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = expenseReport.toStringCurrencyWithAmount())
+                Text(text = expenseReport.totalExpenseAmount.toString())
                 AppTextButton(text = "View More") {
 
                 }
@@ -74,7 +57,7 @@ fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentEx
             ) {
                 Text(text = expenseReport.lastChangedDate)
                 Text(text = "|")
-                Text(text = stringResource(R.string.s_expense,expenseReport.totalExpenseCount))
+                Text(text = stringResource(R.string.s_expense, expenseReport.totalExpenseCount))
             }
         }
     }
@@ -87,8 +70,7 @@ fun HomeScreenProjectItem() {
         title = "ARMADA FOODS",
         totalExpenseCount = 21,
         totalExpenseAmount = 100.12,
-        lastChangedDate = "01.01.2023",
-        isSubmitted = false, currency = "$"
+        lastChangedDate = "01.01.2023"
     )
     ExpenseTrackerTheme {
         HomeScreenProjectItem(

@@ -25,12 +25,16 @@ fun SplashScreen(
 ) {
     LaunchedEffect(key1 = true) {
         delay(3000L)
-        if (userSessionManagerRepository.isLoggedIn()) {
+   /*     if (userSessionManagerRepository.isLoggedIn()) {
             userSessionManagerRepository.getUser()
             navController.navigate(Screen.App.route)
         } else {
             navController.navigate(Screen.Auth.route)
         }
+
+    */
+        navController.navigate(Screen.App.route)
+
     }
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(

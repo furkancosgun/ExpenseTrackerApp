@@ -83,9 +83,9 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
     //Lifecycle    //MVVM
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     //Dependency Injection
     val koin_version = "3.5.3"
@@ -95,4 +95,8 @@ dependencies {
 
     //Coil
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
+
+
 }

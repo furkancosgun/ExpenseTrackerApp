@@ -34,7 +34,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenViewModel = ko
             .padding(UIPadding.MEDIUM.size)
     ) {
         HomeScreenReportAndExpenseStatus()
-        if (viewModel.state.recentExpenseReports.isEmpty()) {
+        if (!viewModel.state.recentExpenseReports.isEmpty()) {
             HomeScreenReportNotFoundContent()
         } else {
             HomeScreenRecentExpenseReportTitle()
