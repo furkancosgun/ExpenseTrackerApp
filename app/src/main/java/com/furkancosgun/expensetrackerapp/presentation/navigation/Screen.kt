@@ -24,11 +24,7 @@ sealed class Screen(val route: String) {
     data object App : Screen("app") {
         data object Base : Screen("base")
         data object CreateReport : Screen("createReport")
-        data object ChooseExpenseType : Screen("chooseExpenseType") {
-            data object Manual : Screen("createManualExpense")
-            data object Scan : Screen("crateScanExpense")
-            data object Voice : Screen("createVoiceExpense")
-        }
+        data object AddEditExpense : Screen("addEditExpense?expenseId={expenseId}")
     }
 }
 

@@ -1,4 +1,4 @@
-package com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual
+package com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -36,6 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
@@ -50,20 +51,20 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UISpacing
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
-import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateManualExpenseScreenViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.AddEditExpenseScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateManualExpenseScreen(
+fun AddEditExpenseScreen(
     navController: NavController,
-    viewModel: CreateManualExpenseScreenViewModel = koinViewModel()
+    viewModel: AddEditExpenseScreenViewModel = koinViewModel()
 ) {
 
     val galleryLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
             it?.let {
-                viewModel.onEvent(CreateManualExpenseScreenEvent.UploadImage(it))
+                viewModel.onEvent(AddEditExpenseScreenEvent.UploadImage(it))
             }
         }
 
@@ -71,11 +72,11 @@ fun CreateManualExpenseScreen(
     LaunchedEffect(key1 = context) {
         viewModel.event.collect {
             when (it) {
-                is CreateManualExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Error -> {
+                is AddEditExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Error -> {
                     viewModel.state.snackBarHostState.showSnackbar(it.error)
                 }
 
-                is CreateManualExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Success -> {
+                is AddEditExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Success -> {
                     navController.navigate(Screen.App.Base.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
@@ -93,7 +94,7 @@ fun CreateManualExpenseScreen(
     ) { it ->
         if (viewModel.state.isOpenCategoryAlert) {
             CreateCategoryAlert(anyButtonClicked = {
-                viewModel.onEvent(CreateManualExpenseScreenEvent.CreateCategory)
+                viewModel.onEvent(AddEditExpenseScreenEvent.CreateCategory)
             })
         }
         Column(
@@ -117,7 +118,7 @@ fun CreateManualExpenseScreen(
                 label = stringResource(R.string.merchant_name),
                 text = viewModel.state.merchantName,
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseScreenEvent.MerchantNameChanged(it))
+                    viewModel.onEvent(AddEditExpenseScreenEvent.MerchantNameChanged(it))
                 },
                 icon = Icons.Default.PushPin,
                 errorText = viewModel.state.merchantNameError
@@ -127,7 +128,7 @@ fun CreateManualExpenseScreen(
                 label = stringResource(R.string.amount),
                 text = viewModel.state.amount.toString(),
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseScreenEvent.AmountChanged(it.toDouble()))
+                    viewModel.onEvent(AddEditExpenseScreenEvent.AmountChanged(it.toDouble()))
                 },
                 icon = Icons.Default.AttachMoney,
                 keyboardType = KeyboardType.Decimal,
@@ -138,7 +139,7 @@ fun CreateManualExpenseScreen(
                 label = stringResource(R.string._12_12_2012),
                 text = viewModel.state.date,
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseScreenEvent.DateChanged(it))
+                    viewModel.onEvent(AddEditExpenseScreenEvent.DateChanged(it))
                 },
                 icon = Icons.Default.DateRange,
                 keyboardType = KeyboardType.Number,
@@ -149,7 +150,7 @@ fun CreateManualExpenseScreen(
                 label = stringResource(R.string.description),
                 text = viewModel.state.description,
                 onTextChanged = {
-                    viewModel.onEvent(CreateManualExpenseScreenEvent.DescriptionChanged(it))
+                    viewModel.onEvent(AddEditExpenseScreenEvent.DescriptionChanged(it))
                 },
                 icon = Icons.Default.Description
             )
@@ -161,14 +162,14 @@ fun CreateManualExpenseScreen(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.create_category)
             ) {
-                viewModel.onEvent(CreateManualExpenseScreenEvent.CreateCategory)
+                viewModel.onEvent(AddEditExpenseScreenEvent.CreateCategory)
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(UISpacing.MEDIUM.size)
             ) {
                 Switch(checked = viewModel.state.includeVat, onCheckedChange = {
-                    viewModel.onEvent(CreateManualExpenseScreenEvent.IncludeVatChanged(it))
+                    viewModel.onEvent(AddEditExpenseScreenEvent.IncludeVatChanged(it))
                 })
                 Text(text = stringResource(R.string.include_vat_tax))
             }
@@ -178,7 +179,7 @@ fun CreateManualExpenseScreen(
                     label = stringResource(R.string.vat_tax),
                     text = viewModel.state.vat.toString(),
                     onTextChanged = {
-                        viewModel.onEvent(CreateManualExpenseScreenEvent.VatChanged(it.toDouble()))
+                        viewModel.onEvent(AddEditExpenseScreenEvent.VatChanged(it.toDouble()))
                     },
                     icon = Icons.Default.AttachMoney,
                     keyboardType = KeyboardType.Decimal
@@ -206,7 +207,7 @@ fun CreateManualExpenseScreen(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.save_expense)
             ) {
-                viewModel.onEvent(CreateManualExpenseScreenEvent.Submit)
+                viewModel.onEvent(AddEditExpenseScreenEvent.Submit)
             }
         }
     }
@@ -216,9 +217,9 @@ fun CreateManualExpenseScreen(
 @Composable
 fun CreateManualExpenseScreen_Preview() {
     ExpenseTrackerTheme {
-        CreateManualExpenseScreen(
+        AddEditExpenseScreen(
             rememberNavController(),
-            viewModel = CreateManualExpenseScreenViewModel()
+            viewModel = AddEditExpenseScreenViewModel(SavedStateHandle(), LocalContext.current)
         )
     }
 }

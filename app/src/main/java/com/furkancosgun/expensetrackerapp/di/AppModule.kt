@@ -11,9 +11,8 @@ import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateOtpCodeUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidatePasswordUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateRepeatedPasswordUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateReportNameUseCase
-import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ChooseExpenseScreenViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.AddEditExpenseScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateCategoryViewModel
-import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateManualExpenseScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.CreateReportViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ForgotPasswordViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.HomeScreenViewModel
@@ -48,8 +47,7 @@ val AppModule = module {
     viewModel { CreateReportViewModel(get()) }
     viewModel { MainScreenViewModel() }
     viewModel { HomeScreenViewModel() }
-    viewModel { ChooseExpenseScreenViewModel() }
-    viewModel { CreateManualExpenseScreenViewModel() }
+    viewModel { AddEditExpenseScreenViewModel(get(), get()) }
     viewModel { CreateCategoryViewModel(get()) }
 
     //Repositories

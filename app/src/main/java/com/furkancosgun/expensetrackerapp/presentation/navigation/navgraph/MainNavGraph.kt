@@ -2,12 +2,12 @@ package com.furkancosgun.expensetrackerapp.presentation.navigation.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
-import com.furkancosgun.expensetrackerapp.presentation.screen.chooseexpensetype.ChooseExpenseTypeScreen
-import com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual.CreateManualExpenseScreen
-import com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.scan.CreateScanExpenseScreen
+import com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense.AddEditExpenseScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.createreport.CreateReportScreen
 import com.furkancosgun.expensetrackerapp.presentation.screen.main.MainScreen
 
@@ -20,17 +20,13 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
         composable(route = Screen.App.CreateReport.route) {
             CreateReportScreen(navController = navController)
         }
-        composable(route = Screen.App.ChooseExpenseType.route) {
-            ChooseExpenseTypeScreen(navController = navController)
-        }
-        composable(route = Screen.App.ChooseExpenseType.Manual.route) {
-            CreateManualExpenseScreen(navController = navController)
-        }
-        composable(route = Screen.App.ChooseExpenseType.Scan.route) {
-            CreateScanExpenseScreen(navController = navController)
-        }
-        composable(route = Screen.App.ChooseExpenseType.Voice.route) {
-            //ChooseExpenseScreen(navController = navController)
+        composable(route = Screen.App.AddEditExpense.route, arguments = listOf(
+            navArgument("id") {
+                type = NavType.StringType
+                nullable = true
+            }
+        )) {
+            AddEditExpenseScreen(navController = navController)
         }
 
     }

@@ -1,9 +1,9 @@
-package com.furkancosgun.expensetrackerapp.presentation.screen.createexpense.manual
+package com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense
 
 import android.net.Uri
 import androidx.compose.material3.SnackbarHostState
 
-data class CreateManualExpenseScreenState(
+data class AddEditExpenseScreenState(
     val categories: List<String> = mutableListOf("Food", "Travel"),
     val merchantName: String = "",
     val merchantNameError: String? = null,
