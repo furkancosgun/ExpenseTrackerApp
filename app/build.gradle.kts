@@ -66,10 +66,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    //Splash Screen
-    implementation("androidx.core:core-splashscreen:1.0.1")
-
+    
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
@@ -95,8 +92,4 @@ dependencies {
 
     //Coil
     implementation("io.coil-kt:coil-compose:2.5.0")
-
-    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
-
-
 }
