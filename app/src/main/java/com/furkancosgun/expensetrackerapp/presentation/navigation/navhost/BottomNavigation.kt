@@ -1,6 +1,7 @@
 package com.furkancosgun.expensetrackerapp.presentation.navigation.navhost
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,9 +11,9 @@ import com.furkancosgun.expensetrackerapp.presentation.screen.settings.SettingsS
 
 
 @Composable
-fun BottomNavigation(navController: NavHostController) {
+fun BottomNavigation(navBarHostController: NavHostController, navController: NavController) {
     NavHost(
-        navController = navController,
+        navController = navBarHostController,
         startDestination = BottomNavScreen.Home.route
     ) {
         composable(route = BottomNavScreen.Home.route) {

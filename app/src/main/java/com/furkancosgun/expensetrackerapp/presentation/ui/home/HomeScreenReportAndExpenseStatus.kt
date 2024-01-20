@@ -24,7 +24,7 @@ fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier) {
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
+                .fillMaxWidth()
                 .padding(UIPadding.MEDIUM.size),
             colors = CardDefaults.cardColors(containerColor = Color.Unspecified),
             border = BorderStroke(1.dp, Color.Gray)
@@ -32,18 +32,6 @@ fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier) {
             Column(modifier = Modifier.padding(UIPadding.MEDIUM.size)) {
                 Text(text = "0", style = MaterialTheme.typography.titleMedium)
                 Text(text = stringResource(R.string.expense_report_created))
-            }
-        }
-        Card(
-            modifier = Modifier
-                .fillMaxWidth(1f)
-                .padding(UIPadding.MEDIUM.size),
-            colors = CardDefaults.cardColors(containerColor = Color.Unspecified),
-            border = BorderStroke(1.dp, Color.Gray)
-        ) {
-            Column(modifier = Modifier.padding(UIPadding.MEDIUM.size)) {
-                Text(text = "0", style = MaterialTheme.typography.titleMedium)
-                Text(text = stringResource(R.string.expense_report_submitted))
             }
         }
     }

@@ -49,7 +49,7 @@
     <string name="manual_input">Manual input</string>
     <string name="scan_receipt">Scan receipt</string>
     <string name="voice_recognition">Voice recognition</string>
-    <string name="create_expense_with_manual">Create Expense With Manual</string>
+    <string name="create_expense">Create Expense</string>
     <string name="you_can_record_your_expenses_in_detail">You can record your expenses in detail.</string>
     <string name="search">Search</string>
     <string name="not_submitted">Not Submitted</string>

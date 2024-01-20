@@ -20,7 +20,6 @@ import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.PushPin
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -34,11 +33,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.furkancosgun.expensetrackerapp.R
 import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
@@ -49,12 +45,10 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedText
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppTextButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UISpacing
-import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.PrimaryColor
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.AddEditExpenseScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditExpenseScreen(
     navController: NavController,
@@ -72,11 +66,11 @@ fun AddEditExpenseScreen(
     LaunchedEffect(key1 = context) {
         viewModel.event.collect {
             when (it) {
-                is AddEditExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Error -> {
+                is AddEditExpenseScreenViewModel.AddEditExpenseScreenViewModelEvent.Error -> {
                     viewModel.state.snackBarHostState.showSnackbar(it.error)
                 }
 
-                is AddEditExpenseScreenViewModel.CreateManualExpenseScreenViewModelEvent.Success -> {
+                is AddEditExpenseScreenViewModel.AddEditExpenseScreenViewModelEvent.Success -> {
                     navController.navigate(Screen.App.Base.route) {
                         popUpTo(navController.graph.id) {
                             inclusive = true
@@ -105,7 +99,7 @@ fun AddEditExpenseScreen(
                 .padding(UIPadding.MEDIUM.size)
         ) {
             Text(
-                text = stringResource(R.string.create_expense_with_manual),
+                text = stringResource(R.string.create_expense),
                 style = MaterialTheme.typography.titleLarge,
                 color = PrimaryColor
             )
@@ -121,7 +115,6 @@ fun AddEditExpenseScreen(
                     viewModel.onEvent(AddEditExpenseScreenEvent.MerchantNameChanged(it))
                 },
                 icon = Icons.Default.PushPin,
-                errorText = viewModel.state.merchantNameError
             )
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -132,7 +125,6 @@ fun AddEditExpenseScreen(
                 },
                 icon = Icons.Default.AttachMoney,
                 keyboardType = KeyboardType.Decimal,
-                errorText = viewModel.state.amountError
             )
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -143,7 +135,6 @@ fun AddEditExpenseScreen(
                 },
                 icon = Icons.Default.DateRange,
                 keyboardType = KeyboardType.Number,
-                errorText = viewModel.state.dateError
             )
             AppOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -157,12 +148,24 @@ fun AddEditExpenseScreen(
             AppOutlinedMenuField(
                 modifier = Modifier.fillMaxWidth(),
                 label = stringResource(R.string.category),
-            )
+                value = viewModel.state.category,
+                dropDownList = viewModel.state.categories,
+            ) {
+                viewModel.onEvent(AddEditExpenseScreenEvent.CategoryChanged(it))
+            }
             AppTextButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.create_category)
             ) {
                 viewModel.onEvent(AddEditExpenseScreenEvent.CreateCategory)
+            }
+            AppOutlinedMenuField(
+                modifier = Modifier.fillMaxWidth(),
+                label = stringResource(id = R.string.report),
+                value = viewModel.state.project,
+                dropDownList = viewModel.state.projects,
+            ) {
+                viewModel.onEvent(AddEditExpenseScreenEvent.ReportChanged(it))
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -210,16 +213,5 @@ fun AddEditExpenseScreen(
                 viewModel.onEvent(AddEditExpenseScreenEvent.Submit)
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun CreateManualExpenseScreen_Preview() {
-    ExpenseTrackerTheme {
-        AddEditExpenseScreen(
-            rememberNavController(),
-            viewModel = AddEditExpenseScreenViewModel(SavedStateHandle(), LocalContext.current)
-        )
     }
 }

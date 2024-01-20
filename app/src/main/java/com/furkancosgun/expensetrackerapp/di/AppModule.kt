@@ -2,6 +2,9 @@ package com.furkancosgun.expensetrackerapp.di
 
 import android.content.Context
 import com.furkancosgun.expensetrackerapp.data.repository.RetrofitAuthDataSource
+import com.furkancosgun.expensetrackerapp.data.repository.RetrofitCategoryDataSource
+import com.furkancosgun.expensetrackerapp.data.repository.RetrofitExpenseDataSource
+import com.furkancosgun.expensetrackerapp.data.repository.RetrofitProjectDataSource
 import com.furkancosgun.expensetrackerapp.data.repository.UserSessionManagerRepository
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateCategoryUseCase
 import com.furkancosgun.expensetrackerapp.domain.usecase.ValidateEmailUseCase
@@ -20,6 +23,7 @@ import com.furkancosgun.expensetrackerapp.presentation.viewmodel.LoginViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.MainScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.RegisterViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.ResetPasswordViewModel
+import com.furkancosgun.expensetrackerapp.presentation.viewmodel.SettingsScreenViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyAccountViewModel
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.VerifyResetPasswordViewModel
 import org.koin.android.ext.koin.androidContext
@@ -44,14 +48,18 @@ val AppModule = module {
     viewModel { VerifyAccountViewModel(get(), get(), get()) }
     viewModel { VerifyResetPasswordViewModel(get(), get(), get()) }
     viewModel { ResetPasswordViewModel(get(), get(), get(), get()) }
-    viewModel { CreateReportViewModel(get()) }
+    viewModel { CreateReportViewModel(get(), get()) }
     viewModel { MainScreenViewModel() }
-    viewModel { HomeScreenViewModel() }
-    viewModel { AddEditExpenseScreenViewModel(get(), get()) }
-    viewModel { CreateCategoryViewModel(get()) }
+    viewModel { HomeScreenViewModel(get()) }
+    viewModel { AddEditExpenseScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModel { CreateCategoryViewModel(get(), get()) }
+    viewModel { SettingsScreenViewModel(get()) }
 
     //Repositories
     single { RetrofitAuthDataSource() }
+    single { RetrofitProjectDataSource() }
+    single { RetrofitCategoryDataSource() }
+    single { RetrofitExpenseDataSource() }
     single {
         UserSessionManagerRepository(
             sharedPreferences = androidContext().getSharedPreferences(

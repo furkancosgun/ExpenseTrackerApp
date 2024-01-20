@@ -11,9 +11,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.furkancosgun.expensetrackerapp.R
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppOutlinedTextField
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
@@ -21,7 +19,6 @@ import com.furkancosgun.expensetrackerapp.presentation.ui.home.HomeScreenProject
 import com.furkancosgun.expensetrackerapp.presentation.ui.home.HomeScreenRecentExpenseReportTitle
 import com.furkancosgun.expensetrackerapp.presentation.ui.home.HomeScreenReportAndExpenseStatus
 import com.furkancosgun.expensetrackerapp.presentation.ui.home.HomeScreenReportNotFoundContent
-import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 import com.furkancosgun.expensetrackerapp.presentation.viewmodel.HomeScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -51,19 +48,11 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenViewModel = ko
             )
             LazyColumn {
                 items(viewModel.state.recentExpenseReports) {
-                    HomeScreenProjectItem()
+                    HomeScreenProjectItem(modifier = Modifier,it)
                 }
             }
 
         }
 
-    }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun HomeScreen_Preview() {
-    ExpenseTrackerTheme {
-        HomeScreen(navController = rememberNavController(), viewModel = HomeScreenViewModel())
     }
 }

@@ -52,7 +52,7 @@ fun MainScreen(navController: NavController, viewModel: MainScreenViewModel = ko
         }
     )
     {
-        BottomNavigation(navController = navBarController)
+        BottomNavigation(navBarHostController = navBarController,navController=navController)
     }
 }
 

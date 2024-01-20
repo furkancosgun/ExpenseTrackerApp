@@ -1,5 +1,6 @@
 package com.furkancosgun.expensetrackerapp.presentation.ui.common
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Category
@@ -16,25 +17,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import com.furkancosgun.expensetrackerapp.domain.model.KeyValue
 
+@SuppressLint("MutableCollectionMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppOutlinedMenuField(
     modifier: Modifier = Modifier,
+    value: String,
     label: String,
-    errorText: String? = null,
-    dropDownList: List<String> = mutableListOf(
-        "Americano",
-        "Cappuccino",
-        "Espresso",
-        "Latte",
-        "Mocha"
-    )
+    dropDownList: List<KeyValue<String, String>> = listOf(),
+    onValueChange: (KeyValue<String, String>) -> Unit,
 ) {
-    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(dropDownList[0]) }
 
     Box(
         modifier = modifier
@@ -47,7 +42,7 @@ fun AppOutlinedMenuField(
         ) {
             OutlinedTextField(
                 modifier = modifier.menuAnchor(),
-                value = selectedText,
+                value = value,
                 onValueChange = {},
                 readOnly = true,
                 label = {
@@ -60,7 +55,6 @@ fun AppOutlinedMenuField(
                     )
                 },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                isError = errorText != null,
                 singleLine = true
             )
 
@@ -68,14 +62,17 @@ fun AppOutlinedMenuField(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
             ) {
-                dropDownList.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            selectedText = item
-                            expanded = false
-                        }
-                    )
+
+                if (dropDownList.isNotEmpty()) {
+                    dropDownList.forEach { item ->
+                        DropdownMenuItem(
+                            text = { Text(text = item.value) },
+                            onClick = {
+                                onValueChange.invoke(item)
+                                expanded = false
+                            }
+                        )
+                    }
                 }
             }
         }

@@ -18,13 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.furkancosgun.expensetrackerapp.R
-import com.furkancosgun.expensetrackerapp.domain.model.RecentExpenseReport
+import com.furkancosgun.expensetrackerapp.data.model.response.ProjectReportResponse
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.AppTextButton
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 import com.furkancosgun.expensetrackerapp.presentation.ui.theme.ExpenseTrackerTheme
 
 @Composable
-fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentExpenseReport) {
+fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: ProjectReportResponse) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -39,7 +39,10 @@ fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentEx
                 horizontalArrangement = Arrangement.spacedBy(UIPadding.MEDIUM.size),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = expenseReport.title, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = expenseReport.projectName ?: "",
+                    style = MaterialTheme.typography.titleMedium
+                )
 
             }
             Row(
@@ -47,7 +50,7 @@ fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentEx
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = expenseReport.totalExpenseAmount.toString())
+                Text(text = (expenseReport.totalAmount ?: 0.0).toString())
                 AppTextButton(text = "View More") {
 
                 }
@@ -55,27 +58,10 @@ fun HomeScreenProjectItem(modifier: Modifier = Modifier, expenseReport: RecentEx
             Row(
                 horizontalArrangement = Arrangement.spacedBy(UIPadding.MEDIUM.size)
             ) {
-                Text(text = expenseReport.lastChangedDate)
+                Text(text = expenseReport.createdAt ?: "")
                 Text(text = "|")
-                Text(text = stringResource(R.string.s_expense, expenseReport.totalExpenseCount))
+                Text(text = stringResource(R.string.s_expense, expenseReport.totalExpenses ?: 0))
             }
         }
-    }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun HomeScreenProjectItem() {
-    val expenseReport = RecentExpenseReport(
-        title = "ARMADA FOODS",
-        totalExpenseCount = 21,
-        totalExpenseAmount = 100.12,
-        lastChangedDate = "01.01.2023"
-    )
-    ExpenseTrackerTheme {
-        HomeScreenProjectItem(
-            modifier = Modifier,
-            expenseReport = expenseReport
-        )
     }
 }

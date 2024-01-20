@@ -95,14 +95,3 @@ fun CreateReportScreen(
         }
     }
 }
-
-@Preview(showSystemUi = true)
-@Composable
-fun CreateReportScreen_Preview() {
-    ExpenseTrackerTheme {
-        CreateReportScreen(
-            rememberNavController(),
-            CreateReportViewModel(ValidateReportNameUseCase(LocalContext.current))
-        )
-    }
-}
