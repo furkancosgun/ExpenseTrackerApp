@@ -14,5 +14,5 @@ sealed class AddEditExpenseScreenEvent {
     data class IncludeVatChanged(val includeVat: Boolean) : AddEditExpenseScreenEvent()
     data object Submit : AddEditExpenseScreenEvent()
     data object CreateCategory : AddEditExpenseScreenEvent()
-    data class UploadImage(val uri: Uri) : AddEditExpenseScreenEvent()
+ 
 }

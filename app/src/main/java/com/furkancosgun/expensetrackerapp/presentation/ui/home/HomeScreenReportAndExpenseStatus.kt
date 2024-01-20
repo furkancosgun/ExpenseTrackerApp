@@ -18,7 +18,7 @@ import com.furkancosgun.expensetrackerapp.R
 import com.furkancosgun.expensetrackerapp.presentation.ui.common.UIPadding
 
 @Composable
-fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier) {
+fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier,expenseReportCount:Int) {
     Row(
         modifier = modifier
     ) {
@@ -30,7 +30,7 @@ fun HomeScreenReportAndExpenseStatus(modifier: Modifier = Modifier) {
             border = BorderStroke(1.dp, Color.Gray)
         ) {
             Column(modifier = Modifier.padding(UIPadding.MEDIUM.size)) {
-                Text(text = "0", style = MaterialTheme.typography.titleMedium)
+                Text(text = expenseReportCount.toString(), style = MaterialTheme.typography.titleMedium)
                 Text(text = stringResource(R.string.expense_report_created))
             }
         }

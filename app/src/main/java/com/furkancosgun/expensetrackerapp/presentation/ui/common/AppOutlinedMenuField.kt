@@ -57,22 +57,18 @@ fun AppOutlinedMenuField(
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 singleLine = true
             )
-
             ExposedDropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
             ) {
-
-                if (dropDownList.isNotEmpty()) {
-                    dropDownList.forEach { item ->
-                        DropdownMenuItem(
-                            text = { Text(text = item.value) },
-                            onClick = {
-                                onValueChange.invoke(item)
-                                expanded = false
-                            }
-                        )
-                    }
+                dropDownList.forEach { item ->
+                    DropdownMenuItem(
+                        text = { Text(text = item.value) },
+                        onClick = {
+                            onValueChange.invoke(item)
+                            expanded = false
+                        }
+                    )
                 }
             }
         }

@@ -16,13 +16,9 @@ import com.furkancosgun.expensetrackerapp.data.repository.httpRequestHandler
 import com.furkancosgun.expensetrackerapp.domain.model.KeyValue
 import com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense.AddEditExpenseScreenEvent
 import com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense.AddEditExpenseScreenState
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 class AddEditExpenseScreenViewModel @SuppressLint("StaticFieldLeak") constructor(
     private val savedStateHandle: SavedStateHandle,
@@ -123,62 +119,12 @@ class AddEditExpenseScreenViewModel @SuppressLint("StaticFieldLeak") constructor
                 state = state.copy(isOpenCategoryAlert = !state.isOpenCategoryAlert)
             }
 
-            is AddEditExpenseScreenEvent.UploadImage -> {
-                state = state.copy(uploadedImage = event.uri)
-                viewModelScope.launch {
-                    scanImage()
-                }
-            }
-
             is AddEditExpenseScreenEvent.ReportChanged -> {
                 state = state.copy(project = event.report.value, projectId = event.report.key)
             }
         }
     }
 
-    private fun scanImage() {
-        var image: InputImage? = null
-        try {
-            image = InputImage.fromFilePath(context, state.uploadedImage!!)
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return
-        }
-        image.let {
-            TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-                .process(it)
-                .addOnSuccessListener { text ->
-
-                    val merchantNameRegex = Regex("""^(.*?)(?:\n|$)""", RegexOption.DOT_MATCHES_ALL)
-                    val merchantNameMatch = merchantNameRegex.find(text.text)
-                    val merchantName = merchantNameMatch?.groupValues?.getOrNull(1) ?: ""
-
-                    val dateRegex = Regex("""TARIH: (\d{2}\.\d{2}\.\d{4})""")
-                    val dateMatch = dateRegex.find(text.text)
-                    val date = dateMatch?.groupValues?.getOrNull(1) ?: ""
-
-                    val amountRegex = Regex("""TOPLAM\s+(.+?)\s+""", RegexOption.DOT_MATCHES_ALL)
-                    val amountMatch = amountRegex.find(text.text)
-                    val amount = amountMatch?.groupValues?.getOrNull(1) ?: ""
-
-                    val vatRegex = Regex("""TOPKDV\s+(.+?)\s+""", RegexOption.DOT_MATCHES_ALL)
-                    val vatMatch = vatRegex.find(text.text)
-                    val vat = vatMatch?.groupValues?.getOrNull(1) ?: ""
-
-                    state = state.copy(
-                        merchantName = merchantName,
-                        date = date,
-                        amount = amount.toDoubleOrNull() ?: 0.0,
-                        vat = vat.toDoubleOrNull() ?: 0.0
-                    )
-                }.addOnFailureListener {
-                    viewModelScope.launch {
-                        eventChannel.send(AddEditExpenseScreenViewModelEvent.Error(it.toString()))
-                    }
-                }
-
-        }
-    }
 
     private suspend fun submitData() {
         val request = CreateExpenseRequest(

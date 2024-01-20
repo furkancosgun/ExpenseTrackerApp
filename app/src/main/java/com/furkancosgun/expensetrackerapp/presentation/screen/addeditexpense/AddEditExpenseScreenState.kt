@@ -1,6 +1,5 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense
 
-import android.net.Uri
 import androidx.compose.material3.SnackbarHostState
 import com.furkancosgun.expensetrackerapp.domain.model.KeyValue
 
@@ -17,7 +16,6 @@ data class AddEditExpenseScreenState(
     val projectId: String = "",
     val includeVat: Boolean = false,
     val vat: Double = 0.0,
-    val uploadedImage: Uri? = null,
     val snackBarHostState: SnackbarHostState = SnackbarHostState(),
     val isOpenCategoryAlert: Boolean = false
 )

@@ -1,9 +1,6 @@
 package com.furkancosgun.expensetrackerapp.presentation.screen.addeditexpense
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -29,13 +25,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
 import com.furkancosgun.expensetrackerapp.R
 import com.furkancosgun.expensetrackerapp.presentation.navigation.Screen
 import com.furkancosgun.expensetrackerapp.presentation.screen.createcategory.CreateCategoryAlert
@@ -55,12 +48,6 @@ fun AddEditExpenseScreen(
     viewModel: AddEditExpenseScreenViewModel = koinViewModel()
 ) {
 
-    val galleryLauncher =
-        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
-            it?.let {
-                viewModel.onEvent(AddEditExpenseScreenEvent.UploadImage(it))
-            }
-        }
 
     val context = LocalContext.current
     LaunchedEffect(key1 = context) {
@@ -188,24 +175,6 @@ fun AddEditExpenseScreen(
                     keyboardType = KeyboardType.Decimal
                 )
             }
-
-            AnimatedVisibility(visible = viewModel.state.uploadedImage != null) {
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .size(400.dp),
-                    painter = rememberAsyncImagePainter(model = viewModel.state.uploadedImage),
-                    contentDescription = stringResource(R.string.expense_photo),
-                    contentScale = ContentScale.FillHeight
-                )
-            }
-            AppButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(R.string.upload_image)
-            ) {
-                galleryLauncher.launch("image/*")
-            }
-
             AppButton(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.save_expense)

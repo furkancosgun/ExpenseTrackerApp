@@ -30,8 +30,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenViewModel = ko
             .fillMaxSize()
             .padding(UIPadding.MEDIUM.size)
     ) {
-        HomeScreenReportAndExpenseStatus()
-        if (!viewModel.state.recentExpenseReports.isEmpty()) {
+        HomeScreenReportAndExpenseStatus(expenseReportCount = viewModel.state.createdExpenseReportCount)
+        if (viewModel.state.recentExpenseReports.isEmpty()) {
             HomeScreenReportNotFoundContent()
         } else {
             HomeScreenRecentExpenseReportTitle()
@@ -51,8 +51,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeScreenViewModel = ko
                     HomeScreenProjectItem(modifier = Modifier,it)
                 }
             }
-
         }
-
     }
 }
